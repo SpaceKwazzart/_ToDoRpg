@@ -1,0 +1,6 @@
+docker-compose.yaml
+
+frontend/app/build
+frontend/app/node_modules
+
+backend/venv
