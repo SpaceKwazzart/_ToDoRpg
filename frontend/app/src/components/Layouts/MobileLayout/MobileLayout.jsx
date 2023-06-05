@@ -1,4 +1,4 @@
-import MobileFooter from "../../modules/MobileFooter/MobileFooter";
+import Footer from "../../modules/Footer/Footer";
 import MobileHeader from "../../modules/MobileHeader/MobileHeader";
 import style from "./MobileLayout.module.css"
 
@@ -9,7 +9,7 @@ function MobileLayout(props) {
                 <div className={style.innerContent}>
                     {props.children}
                 </div>
-            <MobileFooter/>
+            <Footer/>
         </div>
     );
 }

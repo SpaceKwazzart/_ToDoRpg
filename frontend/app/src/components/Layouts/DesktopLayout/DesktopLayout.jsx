@@ -1,5 +1,5 @@
-import DesktopFooter from "../../modules/DesktopFooter/DesktopFooter";
 import DesktopHeader from "../../modules/DesktopHeader/DesktopHeader";
+import Footer from '../../modules/Footer/Footer';
 import style from './DesktopLayout.module.css';
 
 function DesktopLayout(props) {
@@ -9,7 +9,7 @@ function DesktopLayout(props) {
                 <div className={style.innerContent}>
                 {props.children}
                 </div>
-            <DesktopFooter/>
+            <Footer/>
         </div>
     );
 }

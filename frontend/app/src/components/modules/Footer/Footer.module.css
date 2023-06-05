@@ -1,0 +1,91 @@
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+.container > button {
+    position: relative;
+    margin: 0;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: showOverlay 0.25s ease;
+    animation-fill-mode: forwards;
+    z-index: 1;
+}
+
+.overlay.activeOverlay {
+    display: block;
+}
+
+@keyframes showOverlay {
+  0% {
+    display: block;
+  } 10% {
+    opacity: 0;
+  } 100% {
+    opacity: 1;
+  }
+} 
+
+.modal {
+    position: absolute;
+    z-index: 2;
+    height: 50%;
+    width: 70%;
+    max-width: 400px;
+    display: none;
+    opacity: 0;
+    transform: scale(0.1);
+    animation: showModal 0.4s ease;
+    animation-fill-mode: forwards;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal.activeModal {
+    display: block;
+}
+
+@keyframes showModal {
+    0% {
+      display: block;
+    } 10% {
+      opacity: 0;
+    } 100% {
+      opacity: 1;
+      transform: scale(1);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: pink;
+    }
+  } 
+
+.modalContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.activeModal > button {
+  background-color: red;
+}
+
+.activeModal > button:hover {
+  background-color: red;
+}
