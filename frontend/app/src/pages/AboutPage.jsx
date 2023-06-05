@@ -1,20 +1,17 @@
 import { useMedia } from 'react-use';
 import DesktopLayout from '../components/Layouts/DesktopLayout/DesktopLayout';
 import MobileLayout from '../components/Layouts/MobileLayout/MobileLayout';
+import { useSelector } from 'react-redux';
+import useLayout from '../hooks/useLayout';
 
 function AboutPage() {
-    const isDesktop = useMedia('(min-width: 740px)');
+    const Layout = useLayout();
 
     return (
         <>
-        {isDesktop 
-        ? <DesktopLayout>
-            <h1 className="">About page desktop</h1>
-        </DesktopLayout> 
-        : <MobileLayout>
-            <h1 className="">About page mobile</h1>
-        </MobileLayout>
-        }
+        <Layout>
+            <h1>AboutPage</h1>
+        </Layout>
         </>
     );
 }

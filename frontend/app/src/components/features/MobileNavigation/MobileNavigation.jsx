@@ -3,20 +3,10 @@ import Button from "../../shared/Button/Button";
 import MenuElement from "../../shared/MenuElement/MenuElement";
 import style from "./MobileNavigation.module.css";
 import { NavLink } from "react-router-dom";
+import usePopUp from "../../../hooks/usePopUp";
 
 function MobileNavigation() {
-    const [isVisible, setIsVisible] = useState(false);  
-    const menuRef = useRef();
-
-    useEffect( () => {
-        const handler = (e) => {
-            if (!menuRef.current.contains(e.target)) {
-                setIsVisible(false);
-            }
-        }
-        document.addEventListener("mousedown", handler);
-        return () => document.removeEventListener("mousedown", handler);
-    }, [])
+    const [isVisible, setIsVisible, menuRef] = usePopUp();  
 
     return (
         <nav className={style.container}>

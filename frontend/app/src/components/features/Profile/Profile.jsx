@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
 import style from './Profile.module.css';
+import Button from '../../shared/Button/Button';
+import { NavLink } from 'react-router-dom';
 
 function Profile() {
     const isAuth = useSelector(state => state.user.isAuth)
@@ -9,9 +11,12 @@ function Profile() {
         {
         isAuth
         ?
-        <h3>nice</h3>
+        <NavLink to={"/profile"}><Button>Profile</Button></NavLink>
         :
-        <h3>u need to auth</h3>
+        <nav>
+        <NavLink to={"/signin"}><Button>Sign in</Button></NavLink>
+        <NavLink to={"/signup"}><Button>Sign up</Button></NavLink>
+        </nav>
         }
         </>
     );

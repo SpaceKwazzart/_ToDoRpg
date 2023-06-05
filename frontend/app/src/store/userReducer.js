@@ -1,9 +1,9 @@
 const defaultState = {
     id: 0,
     isAuth: false,
-    level: 0,
-    currentExp: 50,
-    currentMax: 100,
+    level: 1,
+    currentExp: 0,
+    currentMax: 1,
 }
 
 // Growth value

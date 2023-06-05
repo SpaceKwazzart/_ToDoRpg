@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+}
+
+.skillsContainer {
+    position: relative;
+    opacity: 0;
+    display: none;
+    top: -500px;
+}
+
+.active {
+    display: block;
+    opacity: 1;
+    top: 0;
+}

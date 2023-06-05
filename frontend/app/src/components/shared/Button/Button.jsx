@@ -2,7 +2,7 @@ import style from "./Button.module.css";
 
 function Button({ onClick, children }) {
     return (
-        <button onClick={onClick} className={style.button}>
+        <button style={{}} onClick={onClick} className={style.button}>
             {children}
         </button>
     );
