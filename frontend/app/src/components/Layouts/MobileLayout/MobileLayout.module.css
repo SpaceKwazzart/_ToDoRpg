@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    height: 99vh;
+    flex-direction: column;
+}
+
+.innerContent {
+    margin-bottom: auto;
+}
