@@ -22,10 +22,10 @@ function MobileNavigation() {
         <nav className={style.container}>
         <div className={`${style.menuBg} ${isVisible ? style.menuBgActive : ''}`}></div>
         <Button onClick={() => setIsVisible(true)}>Menu</Button>
-        <div ref={menuRef} className={`${style.menuPoints} ${isVisible ? style.active : ''}`}>
-            <NavLink to={"/"}><MenuElement>ToDo</MenuElement></NavLink>
-            <NavLink to={"/about"}><MenuElement>About</MenuElement></NavLink>
-            <NavLink to={"/rating"}><MenuElement>Rating</MenuElement></NavLink>
+        <div ref={menuRef} className={`${style.menuPoints} ${isVisible ? style.chosen : ''}`}>
+            <NavLink className={({isActive}) => isActive ? style.active : ""} to={"/"}><MenuElement>ToDo</MenuElement></NavLink>
+            <NavLink className={({isActive}) => isActive ? style.active : ""} to={"/about"}><MenuElement>About</MenuElement></NavLink>
+            <NavLink className={({isActive}) => isActive ? style.active : ""} to={"/rating"}><MenuElement>Rating</MenuElement></NavLink>
         </div>
         </nav>
     );

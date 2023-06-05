@@ -48,7 +48,7 @@
     transition: 0.5s;
 }
 
-.active {
+.chosen {
     visibility: visible;
     background-color: pink;
     width: 120px;
@@ -56,8 +56,14 @@
     transform: translateX(0px);
 }
 
-.active > * {
+.chosen > * {
     visibility: visible;
     color: black;
 }
+
+.active div {
+    background-color: red;
+}
+
+
 
