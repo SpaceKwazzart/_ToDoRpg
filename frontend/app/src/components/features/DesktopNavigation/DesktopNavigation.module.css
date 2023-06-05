@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: 5%;
+}
+
+.active > button {
+    background-color: red;
+}
+
+.active > button:hover {
+    background-color: red;
+}
