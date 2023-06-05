@@ -1,0 +1,10 @@
+.element {
+    padding: 10px;
+    width: auto;
+    color: white;
+    background-color: purple;
+    text-decoration: none;
+    border: 1px solid black;
+    margin: 10px;
+    font-size: medium;
+}

@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+}
+
+.container * {
+    margin: 0;
+}
+
+.container p {
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    margin-left: 1%;
+}

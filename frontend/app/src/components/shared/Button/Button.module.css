@@ -1,0 +1,18 @@
+.button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 5px;
+    margin: 5px;
+    transition: 0.25s;
+    border-radius: 20%;
+    outline: 1px solid black;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: var(--second-color);
+    cursor: pointer;
+    border-radius: 5%;
+    scale: 105%;
+    transition: 0.25s;
+}
