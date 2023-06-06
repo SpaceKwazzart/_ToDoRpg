@@ -11,3 +11,23 @@
     display: flex;
     justify-content: space-between;
 }
+
+.skillsContainer {
+    border: 1px solid red;
+    display: flex;
+    overflow: scroll;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 85%;
+    height: 70%;
+}
+
+.topContainer {
+    display: flex;
+}
+
+.scoreText {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}

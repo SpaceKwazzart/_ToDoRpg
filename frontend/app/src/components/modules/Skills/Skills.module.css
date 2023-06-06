@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
     height: auto;
+    max-height: 50vh;
+    overflow-y: scroll;
 }
 
 .skillsContainer {
@@ -10,10 +12,20 @@
     opacity: 0;
     display: none;
     top: -500px;
+    border: 1px solid red;
 }
 
 .active {
     display: block;
     opacity: 1;
     top: 0;
+}
+
+.addButton {
+    margin-top: 15px;
+}
+
+.skillContainer {
+    display: flex;
+    align-items: end;
 }

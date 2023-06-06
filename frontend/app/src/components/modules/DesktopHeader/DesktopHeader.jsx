@@ -7,7 +7,7 @@ function DesktopHeader() {
     return (
         <div className={style.container}>
             <ProgressBar/>
-            <DesktopNavigation/>
+            <div className={style.centerElement}><DesktopNavigation/></div>
             <Profile/>
         </div>
     );

@@ -1,52 +1,5 @@
 const defaultState = [
-    {
-        id: 1000, 
-        name: "Read about Asembly",
-        text: "Just text what u need to do and more more text Just text what u need to do and more more text",
-        order: 1,
-    },
-    {
-        id: 1001, 
-        name: "End popup feature",
-        text: "Just text what u need to do",
-        order: 2,
-    },
-    {
-        id: 1002, 
-        name: "End popup feature",
-        text: "Just text what u need to do",
-        order: 2,
-    },
-    { 
-        id: 1003, 
-        name: "End popup feature",
-        text: "Just text what u need to do",
-        order: 2,
-    },
-    {
-        id: 1004, 
-        name: "Read about Asembly",
-        text: "Just text what u need to do and more more text Just text what u need to do and more more text",
-        order: 1,
-    },
-    {
-        id: 1005, 
-        name: "End popup feature",
-        text: "Just text what u need to do",
-        order: 2,
-    },
-    { 
-        id: 1006, 
-        name: "End popup feature",
-        text: "Just text what u need to do",
-        order: 2,
-    },
-    {
-        id: 1007, 
-        name: "Read about Asembly",
-        text: "Just text what u need to do and more more text Just text what u need to do and more more text",
-        order: 1,
-    },
+    
 ];
 
 

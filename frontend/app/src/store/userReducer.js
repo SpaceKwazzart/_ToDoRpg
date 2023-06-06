@@ -31,21 +31,22 @@ export const userReducer = (state = defaultState, action) => {
                 }
 
         case ADD_EXP:
-            const newExp = state.currentExp + action.payload
+            let newExp = state.currentExp + action.payload
 
-            if (newExp > state.currentMax) {
-                return {
+            while (newExp >= state.currentMax) {
+                state = {
                     ...state,
+                    currentMax: state.currentMax * GROWTH_VALUE,
+                    level: state.level += 1, 
                     currentExp: newExp - state.currentMax,
-                    level: state.level += 1,
-                    currentMax: state.currentMax * GROWTH_VALUE,     
-                    }
-            } else {
-                return {
-                    ...state,
-                     currentExp: newExp
-                    }
+                };
+                newExp = state.currentExp;
             }
+
+            return {
+                ...state,
+                 currentExp: newExp
+                }
         default:
             return state
     }

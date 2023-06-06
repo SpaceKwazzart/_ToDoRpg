@@ -2,5 +2,11 @@
     display: flex;
     justify-content: space-between;
     background-color: var(--background-color);
+    position: relative;
 }
 
+.centerElement {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

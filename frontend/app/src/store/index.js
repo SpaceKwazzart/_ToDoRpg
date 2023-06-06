@@ -13,4 +13,13 @@ const rootReducer = combineReducers({
     tasks: tasksReducer,
 })
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+// const persistedState = localStorage.getItem('reduxState') 
+//                        ? JSON.parse(localStorage.getItem('reduxState'))
+//                        : {}
+
+export const store = createStore(rootReducer, // persistedState,
+     composeWithDevTools(applyMiddleware(thunk)))
+
+// store.subscribe(()=>{
+//   localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+// })

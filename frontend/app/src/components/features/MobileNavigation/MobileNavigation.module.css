@@ -19,6 +19,7 @@
     transition: all 0.15s ease-in-out;
     animation: animTo 1s ease;
     animation-fill-mode: forwards;
+    z-index: 2;
 }
 
 .menuBgActive {

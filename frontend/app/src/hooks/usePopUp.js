@@ -6,7 +6,7 @@ export default function usePopUp() {
 
     useEffect( () => {
         const handler = e => {
-            if (!ref.current.contains(e.target)) {
+            if (ref.current && !ref.current.contains(e.target)) {
                 setIsVisible(false);
             }
         }

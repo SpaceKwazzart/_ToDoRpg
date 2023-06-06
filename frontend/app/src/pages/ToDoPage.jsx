@@ -13,8 +13,15 @@ function ToDoPage() {
     return (
         <>
         <Layout>
+            <div style={{
+                "display": "flex",
+                "flexDirection": "column",
+                "textAlign": "center",
+        }}>
+            <h1>ToDo</h1>
             <Skills/>
             <Tasks/>
+            </div>
         </Layout>
         </>
     );

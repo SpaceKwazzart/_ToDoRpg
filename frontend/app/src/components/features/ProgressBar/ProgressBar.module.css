@@ -3,8 +3,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30%;
-    max-width: 350px;
 }
 
 .container * {
@@ -32,4 +30,12 @@
 
 .percentText {
     color: white;
+    z-index: 0;
+}
+
+.outterContainer {
+    display: flex;
+    justify-content: start;
+    width: 30%;
+    max-width: 350px;
 }

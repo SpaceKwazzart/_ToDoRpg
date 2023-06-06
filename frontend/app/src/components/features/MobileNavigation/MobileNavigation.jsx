@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import usePopUp from "../../../hooks/usePopUp";
 
 function MobileNavigation() {
-    const [isVisible, setIsVisible, menuRef] = usePopUp();  
+    const [isVisible, setIsVisible, menuRef] = usePopUp(); 
 
     return (
         <nav className={style.container}>

@@ -2,12 +2,12 @@ import Bar from "../../shared/Bar/Bar";
 import style from './Skill.module.css';
 
 function Skill({ name, currentExp, currentMax, level }) {
-    const percent = currentExp /  currentMax * 100
+    const percent = Math.round(currentExp / currentMax * 100);
 
     return (
-        <div className={style.skill}>
+        <div draggable className={style.skill}>
             <p>{name} Level {level}</p>
-            <Bar percent={percent}>{`${currentExp}`}</Bar>
+            <Bar percent={percent}>{percent}%</Bar>
         </div>
     );
 }
