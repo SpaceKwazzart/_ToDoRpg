@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import Button from '../../shared/Button/Button';
+import { Button } from '@mui/material';
 import Skill from '../../features/Skill/Skill';
 import style from './Task.module.css';
 import usePopUp from '../../../hooks/usePopUp';
 import Modal from '../../modal/Modal/Modal';
-import { useRef, useState } from 'react';
-import { createAddexpAction } from '../../../store/userReducer';
-import { createAddExpSkillTypeAction } from '../../../store/skillsReducer';
-import { createRemoveTaskAction } from '../../../store/tasksReducer';
+import { useState } from 'react';
+import { addExp, } from '../../../store/userReducer';
+import { addSkillExp } from '../../../store/skillsReducer';
+import { removeTask } from '../../../store/tasksReducer';
 
 function Task({ onDelete, id, name, text }) {
     const dispatch = useDispatch();
@@ -17,9 +17,9 @@ function Task({ onDelete, id, name, text }) {
 
     const onComplete = (taskId, skillId) => {
         const newScore = score / 60
-        dispatch(createAddexpAction(newScore));
-        dispatch(createAddExpSkillTypeAction({id: skillId, exp: newScore}));
-        dispatch(createRemoveTaskAction(taskId))
+        dispatch(addExp(newScore));
+        dispatch(addSkillExp({id: skillId, exp: newScore}));
+        dispatch(removeTask(taskId))
         setScore("");
         setIsVisible(false);
     }

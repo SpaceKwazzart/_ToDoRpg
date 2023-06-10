@@ -1,0 +1,3 @@
+const GROWTH_VALUE = 1.0673003
+
+export default GROWTH_VALUE

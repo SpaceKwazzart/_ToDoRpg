@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-import style from './Profile.module.css';
-import Button from '../../shared/Button/Button';
+import { Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 function Profile() {

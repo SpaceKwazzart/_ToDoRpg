@@ -1,35 +1,12 @@
-import { useState } from "react";
-import Bar from "../../shared/Bar/Bar";
-import style from './ProgressBar.module.css';
-import { useSelector, useDispatch } from 'react-redux';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
-function ProgressBar() {
-    const percent = Math.round(useSelector(state => state.user.currentExp / state.user.currentMax * 100))
-    const level = useSelector(state => state.user.level)
+export default function ProgressBar({ value }) {
 
-    const isDesktop = useSelector(state => state.media.isDesktop)
-
-    return (
-        <>
-        {
-            isDesktop
-            ?
-            <div className={style.outterContainer}>
-            <div className={style.container}>
-            <Bar percent={percent}></Bar>
-            <p className={style.percentText}>{percent}%</p>
-            </div>
-            <p className={style.level}>Level {level}</p>
-            </div>
-            :
-            <div className={style.container}>
-            <Bar percent={percent}></Bar>
-            <p className={style.percentText}>{percent}%</p>
-            <p className={style.levelMobile}>Level {level}</p>
-            </div>
-        }
-        </>
-    );
+  return (
+    <Box sx={{ width: '100%' }}>
+      <LinearProgress variant="determinate" value={value} />
+    </Box>
+  );
 }
-
-export default ProgressBar;

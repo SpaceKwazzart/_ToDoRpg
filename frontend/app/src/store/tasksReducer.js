@@ -1,32 +1,22 @@
-const defaultState = [
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = [
     
 ];
 
-
-const ADD_TASK = "ADD_TASK";
-const REMOVE_TASK = "REMOVE_TASK";
-
-export const tasksReducer = (state = defaultState, action) => {
-    switch (action.type) {
-        case ADD_TASK:
-          return [...state, action.payload]
-        case REMOVE_TASK:
+export const tasksSlice = createSlice({
+    name: 'tasks',
+    initialState,
+    reducers: {
+        addTask: (state, action) => {
+            state.unshift(action.payload)
+        },
+        removeTask: (state, action) => {
             return state.filter(skill => skill.id !== action.payload)
-        default:
-            return state
+        }
     }
-}
+})
 
-export const createAddTaskAction = (payload) => {
-    return {
-        type: ADD_TASK,
-        payload: payload,
-    }
-}
+export const { addTask, removeTask } = tasksSlice.actions
 
-export const createRemoveTaskAction = (payload) => {
-    return {
-        type: REMOVE_TASK,
-        payload: payload,
-    }
-}
+export default tasksSlice.reducer

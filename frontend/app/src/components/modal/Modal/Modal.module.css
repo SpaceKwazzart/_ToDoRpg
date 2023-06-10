@@ -11,7 +11,7 @@
     max-width: 750px;
     height: 80%;
     max-height: 1200px;
-    background-color: pink;
+    background-color: black;
     animation: modalEnter 0.3s ease;
     animation-fill-mode: forwards;
     position: fixed;

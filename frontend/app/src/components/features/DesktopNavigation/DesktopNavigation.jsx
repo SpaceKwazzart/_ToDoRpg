@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
-import Button from "../../shared/Button/Button";
+import { Button } from '@mui/material';
 import style from "./DesktopNavigation.module.css";
 
 function DesktopNavigation() {
     return (
         <nav className={style.container}>
             <NavLink 
-            className={({isActive}) => isActive ? style.active : ""} 
+            className={({isActive}) => isActive ? style.active : ""}
             to={"/about"}>
                 <Button>About</Button>
             </NavLink>

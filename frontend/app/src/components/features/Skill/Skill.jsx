@@ -1,4 +1,4 @@
-import Bar from "../../shared/Bar/Bar";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import style from './Skill.module.css';
 
 function Skill({ name, currentExp, currentMax, level }) {
@@ -7,7 +7,7 @@ function Skill({ name, currentExp, currentMax, level }) {
     return (
         <div draggable className={style.skill}>
             <p>{name} Level {level}</p>
-            <Bar percent={percent}>{percent}%</Bar>
+            <ProgressBar value={percent}/>
         </div>
     );
 }

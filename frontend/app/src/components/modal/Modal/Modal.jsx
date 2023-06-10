@@ -1,15 +1,18 @@
-import { useDispatch } from "react-redux";
-import usePopUp from "../../../hooks/usePopUp";
 import style from './Modal.module.css';
 
 
-function Modal({ isVisible, setIsVisible, modalRef, children }) {
+function Modal({ isVisible, onSubmit, modalRef, children }) {
+
+    const handleForm = (e) => {
+        e.preventDefault();
+        onSubmit();
+    }
 
     return (
         <>
-        <div ref={modalRef} className={`${style.modal} ${isVisible ? style.active : ''}`}>
+        <form onSubmit={handleForm} ref={modalRef} className={`${style.modal} ${isVisible ? style.active : ''}`}>
             {children}
-        </div>
+        </form>
         <div className={`${style.overlay} ${isVisible ? style.active : ''}`}>
         </div>
         </>

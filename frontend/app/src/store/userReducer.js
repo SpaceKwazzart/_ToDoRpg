@@ -1,4 +1,7 @@
-const defaultState = {
+import { createSlice } from '@reduxjs/toolkit'
+import GROWTH_VALUE from '../consts'
+
+const initialState = {
     id: 0,
     isAuth: false,
     level: 1,
@@ -6,69 +9,41 @@ const defaultState = {
     currentMax: 1,
 }
 
-// Growth value
-const GROWTH_VALUE = 1.0673003
+export const userSlice = createSlice({
+    name: 'tasks',
+    initialState,
+    reducers: {
+        signIn: (state) => {
+            state.isAuth = true
+        },
 
-// Auth action-types
-const SIGN_IN = "SIGN_IN"
-const SIGN_OUT = "SIGN_OUT"
+        signOut: (state) => {
+            state.isAuth = false
+        },
 
-// Progress action-types
-const ADD_EXP = "ADD_EXP"
-
-export const userReducer = (state = defaultState, action) => {
-    switch (action.type) {
-        case SIGN_IN:
-            return {
-                ...state,
-                 isAuth: action.payload
-                }
-
-        case SIGN_OUT:
-            return {
-                ...state,
-                 isAuth: action.payload
-                }
-
-        case ADD_EXP:
-            let newExp = state.currentExp + action.payload
-
-            while (newExp >= state.currentMax) {
-                state = {
-                    ...state,
-                    currentMax: state.currentMax * GROWTH_VALUE,
-                    level: state.level += 1, 
-                    currentExp: newExp - state.currentMax,
-                };
-                newExp = state.currentExp;
+        addExp: (state, action) => {
+            let newExp = state.currentExp + action.payload;
+            let updatedState = { ...state }; // Создаем копию объекта state
+          
+            while (newExp >= updatedState.currentMax) {
+              updatedState = {
+                ...updatedState,
+                currentMax: updatedState.currentMax * GROWTH_VALUE,
+                level: updatedState.level + 1,
+                currentExp: newExp - updatedState.currentMax,
+              };
+              newExp = updatedState.currentExp;
             }
-
+          
             return {
-                ...state,
-                 currentExp: newExp
-                }
-        default:
-            return state
+              ...updatedState,
+              currentExp: newExp,
+            };
+          }
     }
-}
+})
 
-export const createSigninAction = () => {
-    return {
-        type: SIGN_IN,
-        payload: true,
-    }
-}
 
-export const createSignoutAction = () => {
-    return {
-        type: SIGN_OUT,
-        payload: false,
-    }
-}
 
-export const createAddexpAction = (payload) => {
-    return {
-        type: ADD_EXP,
-        payload: payload,
-    }
-}
+export const { signIn, signOut, addExp } = userSlice.actions;
+export default userSlice.reducer;

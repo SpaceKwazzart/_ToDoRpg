@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import Button from "../../shared/Button/Button";
+import { useState } from "react";
+import { Button } from '@mui/material';
 import style from './Footer.module.css';
 import usePopUp from "../../../hooks/usePopUp";
 import Modal from "../../modal/Modal/Modal";

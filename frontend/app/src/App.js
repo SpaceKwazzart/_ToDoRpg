@@ -9,19 +9,29 @@ import AboutPage from './pages/AboutPage';
 import RatingPage from './pages/RatingPage';
 import { useMedia } from 'react-use';
 import { useDispatch } from 'react-redux';
-import { createSetDisplayTypeAction } from './store/mediaReducer';
+import { setDisplayType } from './store/mediaReducer';
 import { useEffect } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
   const isDesktop = useMedia('(min-width: 740px)');
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(createSetDisplayTypeAction(isDesktop));
+    dispatch(setDisplayType(isDesktop));
   }, [isDesktop, dispatch]);
 
   return (
-    <BrowserRouter>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <BrowserRouter>
       <Routes>
         <Route path='/' element={<ToDoPage/>}></Route>
         <Route path='about/' element={<AboutPage/>}></Route>
@@ -32,6 +42,7 @@ function App() {
         <Route path='*' element={<NotFound404/>}></Route>
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

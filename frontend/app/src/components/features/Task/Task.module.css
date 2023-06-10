@@ -2,9 +2,9 @@
     max-width: 500px;
     min-width: 100px;
     width: 85%;
-    background-color: gainsboro;
     margin: 10px;
     text-align: center;
+    border: 1px solid pink;
 }
 
 .innerContainer {

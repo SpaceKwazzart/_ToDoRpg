@@ -1,13 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import style from './Tasks.module.css'
 import Task from '../../features/Task/Task';
-import Button from '../../shared/Button/Button';
 import Modal from '../../modal/Modal/Modal';
 import usePopUp from '../../../hooks/usePopUp';
 import { useRef, useState } from 'react';
-import { createAddTaskAction, createRemoveTaskAction } from '../../../store/tasksReducer';
-import { createAddexpAction } from '../../../store/userReducer';
-import { createAddExpSkillTypeAction } from '../../../store/skillsReducer';
+import { addTask, removeTask } from '../../../store/tasksReducer';
+import { Button } from '@mui/material';
 
 function Tasks() {
     const dispatch = useDispatch();
@@ -19,8 +17,17 @@ function Tasks() {
     const textRef = useRef();
 
     const onDelete = (id) => {
-        dispatch(createRemoveTaskAction(id));
+        dispatch(removeTask(id));
     }
+
+    const onCommit = () => {
+        if (newTask.name.length > 0) {
+            dispatch(addTask(newTask))
+            setNewTask({name: '', text: '', order: 1, id: newTask.id + 1});
+            textRef.current.value = '';
+            nameRef.current.value = '';
+            setIsVisible(false);
+    }}
 
     return (
         <>
@@ -29,7 +36,7 @@ function Tasks() {
                 return <Task onDelete={onDelete} key={task.id} {...task}/>
             })}
             <Button onClick={() => setIsVisible(true)}>Add</Button>
-            <Modal isVisible={isVisible} setIsVisible={setIsVisible} modalRef={modalRef}>
+            <Modal onSubmit={onCommit} isVisible={isVisible} setIsVisible={setIsVisible} modalRef={modalRef}>
                 <h2>Add new task</h2>
                 <div>
                     <h3>Title*</h3>
@@ -45,15 +52,9 @@ function Tasks() {
                 </div>
                 <div>
                 <Button onClick={() => setIsVisible(false)}>CANCEL</Button>
-                <Button onClick={() => {
-                    if (newTask.name.length > 0) {
-                        dispatch(createAddTaskAction(newTask))
-                        setNewTask({name: '', text: '', order: 1, id: newTask.id + 1});
-                        textRef.current.value = '';
-                        nameRef.current.value = '';
-                        setIsVisible(false);
-                    }
-                }}>COMMIT</Button>
+                <Button onClick={onCommit}>COMMIT</Button>
+                <input style={{display: "none"}} id='sub' onSubmit={onCommit} type="submit"/> 
+                <label for="sub"/>
                 </div>
             </Modal>
           </div>
