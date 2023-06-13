@@ -1,0 +1,29 @@
+# Byte-compiled / optimized Python files
+backend/reachTheTop/__pycache__/
+*.pyc
+
+# Django development server pid file
+*.pid
+
+# Django media files
+media/
+
+# Django static files
+staticfiles/
+
+# Database
+*.sqlite3
+
+# Environment variables file
+.env
+
+# IDE и системные файлы
+.idea/
+.vscode/
+*.pydevproject
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.DS_Store
+Thumbs.db
