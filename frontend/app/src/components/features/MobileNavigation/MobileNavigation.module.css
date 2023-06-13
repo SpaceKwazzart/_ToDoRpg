@@ -62,9 +62,11 @@
     color: black;
 }
 
-.active div {
+.active > * {
     background-color: red;
 }
 
-
+.menuPoints > .active {
+    background-color: red;
+}
 

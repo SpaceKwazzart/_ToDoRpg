@@ -3,3 +3,7 @@
     text-align: center;
     padding: 10px;
 }
+
+.levelLabel {
+    color: rgb(189, 0, 0);
+}

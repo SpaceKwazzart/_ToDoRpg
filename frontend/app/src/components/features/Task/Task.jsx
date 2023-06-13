@@ -1,13 +1,17 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { Button } from '@mui/material';
+
 import Skill from '../../features/Skill/Skill';
-import style from './Task.module.css';
 import usePopUp from '../../../hooks/usePopUp';
 import Modal from '../../modal/Modal/Modal';
-import { useState } from 'react';
+
 import { addExp, } from '../../../store/userReducer';
 import { addSkillExp } from '../../../store/skillsReducer';
 import { removeTask } from '../../../store/tasksReducer';
+
+import style from './Task.module.css';
 
 function Task({ onDelete, id, name, text }) {
     const dispatch = useDispatch();
@@ -19,7 +23,7 @@ function Task({ onDelete, id, name, text }) {
         const newScore = score / 60
         dispatch(addExp(newScore));
         dispatch(addSkillExp({id: skillId, exp: newScore}));
-        dispatch(removeTask(taskId))
+        dispatch(removeTask(taskId));
         setScore("");
         setIsVisible(false);
     }
@@ -44,9 +48,9 @@ function Task({ onDelete, id, name, text }) {
             </div>
             <div className={style.skillsContainer}>
                 {
-                skills.length > 0
+                skills.array.length > 0
                 ?
-                skills.map((skill, index) => {
+                skills.array.map((skill, index) => {
                     return (
                         <div key={skill.id} className={style.buttonContainer}>
                         <Skill {...skill}/>
