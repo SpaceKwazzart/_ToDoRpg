@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { signIn } from "../../store/userReducer";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { HOST, PORT } from "../../consts.js"
+
 // Define the Login function.
 export const SignInPage = () => {
      const [username, setUsername] = useState('');
@@ -22,7 +24,7 @@ export const SignInPage = () => {
 
           try {
             const { data } = await axios.post(
-              'http://localhost:8000/token/',
+              `http://${HOST}:${PORT}/api/token/`,
               user,
               { headers: { 'Content-Type': 'application/json' } }
             );

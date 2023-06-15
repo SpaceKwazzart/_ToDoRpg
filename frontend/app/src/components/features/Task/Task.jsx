@@ -7,9 +7,7 @@ import Skill from '../../features/Skill/Skill';
 import usePopUp from '../../../hooks/usePopUp';
 import Modal from '../../modal/Modal/Modal';
 
-import { addExp, } from '../../../store/userReducer';
-import { addSkillExp } from '../../../store/skillsReducer';
-import { removeTask } from '../../../store/tasksReducer';
+import { completeTaskAction } from '../../../store/skillsReducer';
 
 import style from './Task.module.css';
 
@@ -21,10 +19,8 @@ function Task({ onDelete, id, name, text }) {
 
     const onComplete = (taskId, skillId) => {
         const newScore = score / 60
-        dispatch(addExp(newScore));
-        dispatch(addSkillExp({id: skillId, exp: newScore}));
-        dispatch(removeTask(taskId));
-        setScore("");
+        dispatch(completeTaskAction({ taskId: taskId, skillId: skillId, newExpirience: newScore }));
+        setScore(0);
         setIsVisible(false);
     }
 

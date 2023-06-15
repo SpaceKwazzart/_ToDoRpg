@@ -1,5 +1,4 @@
-const GROWTH_VALUE = 1.0673003
+export const GROWTH_VALUE = 1.0673003;
 
-export const HOST = 'localhost';
-
-export default GROWTH_VALUE
+export const HOST = '192.168.1.15';
+export const PORT = '80';

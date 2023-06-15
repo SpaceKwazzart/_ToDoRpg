@@ -1,9 +1,10 @@
 import axios from "axios";
-import { HOST } from "../consts";
+import { HOST, PORT } from "../consts";
 
 export const deleteUserTodo = async (userId, todoId) => {
   try {
-    await axios.delete(`http://${HOST}:8000/users/${userId}/todos/${todoId}`);
+    const response = await axios.delete(`http://${HOST}:${PORT}/api/users/${userId}/todos/${todoId}`);
+    return response;
   } catch (error) {
     console.error(error.response.data);
   }

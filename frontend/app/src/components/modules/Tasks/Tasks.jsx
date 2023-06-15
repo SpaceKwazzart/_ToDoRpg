@@ -28,7 +28,8 @@ function Tasks() {
 
     const onCommit = () => {
         if (newTask.name.length > 0) {
-            dispatch(postTaskAction(newTask))
+            console.log(newTask);
+            dispatch(postTaskAction(newTask));
             setNewTask({name: '', text: '', order: 1, id: uuidv4()});
             textRef.current.value = '';
             nameRef.current.value = '';

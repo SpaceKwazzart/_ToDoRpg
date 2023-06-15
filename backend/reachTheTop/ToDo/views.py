@@ -9,6 +9,7 @@ from Users.serializers import ProfileSerializer
 from .models import Todo, Skill
 from .serializers import TodoSerializer, SkillSerializer
 from .business_logic import update_level
+import logging
 
 class UserTodoListCreate(ListCreateAPIView):
     """
@@ -71,18 +72,23 @@ class UserSkillRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
                 skill = self.get_object()
                 user = Profile.objects.get(pk=kwargs["user_id"])
                 
-                new_user = update_level(new_expirience, user)
-                new_skill = update_level(new_expirience, skill)
+                new_user_data = update_level(new_expirience, user)
+                new_skill_data = update_level(new_expirience, skill)
                 
                 user.total_todo += 1
                 
-                profile_serializer = ProfileSerializer(user, data=new_user, partial=partial)
+                profile_serializer = ProfileSerializer(user, data=new_user_data, partial=partial)
                 profile_serializer.is_valid(raise_exception=True)
                 profile_serializer.save()
                 
-                skill_serializer = self.get_serializer(skill, data=new_skill, partial=partial)
+                skill_serializer = self.get_serializer(skill, data=new_skill_data, partial=partial)
                 skill_serializer.is_valid(raise_exception=True)
                 skill_serializer.save()
+                
+                return Response({
+                'skill': skill_serializer.data,
+                'user': profile_serializer.data,
+                })
         
             except ObjectDoesNotExist:
                 return Response(data={"Answer": "User or Skill not found"}, status=status.HTTP_404_NOT_FOUND)

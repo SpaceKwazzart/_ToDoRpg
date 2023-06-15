@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import GROWTH_VALUE from '../consts'
 import { getUserSkills } from '../api/getUserSkills';
 import { postUserSkill } from '../api/postUserSkill';
 import { deleteUserSkill } from '../api/deleteUserSkill'
+import { patchCompleteTodo } from '../api/patchCompleteTodo'
+import { addExp } from "./userReducer.js";
+import { deleteTodoAction } from "./tasksReducer";
 
 const initialState = {
   isLoading: false,
@@ -31,7 +33,7 @@ export const fetchSkills = createAsyncThunk(
 );
 
 export const postSkillAction = createAsyncThunk(
-  'tasks/postSkillAction',
+  'skills/postSkillAction',
   async function(newSkill, {dispatch, getState}) {
       const state = getState();
 
@@ -50,7 +52,7 @@ export const postSkillAction = createAsyncThunk(
 )
 
 export const deleteSkillAction = createAsyncThunk(
-  'tasks/deleteSkillAction',
+  'skills/deleteSkillAction',
   async function(id, { getState, dispatch, rejectWithValue }) {
     const state = getState();
     try {
@@ -59,6 +61,30 @@ export const deleteSkillAction = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(error);
+    }
+  }
+)
+
+export const completeTaskAction = createAsyncThunk(
+  'skills/completeTaskAction',
+  async function({ taskId, skillId, newExpirience }, { getState, dispatch, rejectWithValue }) {
+    const state = getState();
+    console.log("I am in complete");
+    try {
+      const response = await patchCompleteTodo(state.user.id, skillId, newExpirience);
+      
+      if (response.statusText === "OK") {
+        const skill = response.data["skill"]
+        const user = response.data["user"]
+        console.log(skill, user);
+        dispatch(addSkillExp(skill));
+        dispatch(addExp(user));
+        await dispatch(deleteTodoAction(taskId));
+      } else {
+        throw new Error("Bad response");
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 )
@@ -85,23 +111,21 @@ export const skillSlice = createSlice({
         },
 
         addSkillExp: (state, action) => {
+            console.log("1", state.array);
             const newArray = state.array.map(skill => {
               if (skill.id !== action.payload.id) {
                 return skill;
               } else {
-                let newExp = skill.currentExp + action.payload.exp;
-                let updatedSkill = { ...skill };
-                while (newExp >= updatedSkill.currentMax) {
-                  updatedSkill.currentExp = newExp - updatedSkill.currentMax;
-                  updatedSkill.level += 1;
-                  updatedSkill.currentMax *= GROWTH_VALUE;
-                  newExp = updatedSkill.currentExp;
+                return {
+                  ...action.payload,
+                  id: action.payload.id,
+                  currentExp: action.payload.current_exp,
+                  currentMax: action.payload.current_max,
                 }
-                updatedSkill.currentExp = newExp;
-                return updatedSkill;
               }
             });
-            state.array = newArray
+            state.array = newArray;
+            console.log(state.array);
           }
     },
     extraReducers: {

@@ -2,6 +2,7 @@
 import axios from "axios";
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { HOST, PORT } from '../../consts';
 // Define the Login function.
 export const SignUpPage = () => {
      const [username, setUsername] = useState('');
@@ -20,7 +21,7 @@ export const SignUpPage = () => {
 
           try {
             const { data } = await axios.post(
-              'http://localhost:8000/users/',
+              `http://${HOST}:${PORT}/api/users/`,
               user,
               { headers: { 'Content-Type': 'application/json' } }
             );

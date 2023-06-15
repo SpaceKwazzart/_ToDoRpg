@@ -38,9 +38,11 @@ export const postTaskAction = createAsyncThunk(
         const sendingData = {
             user: state.user.id,
             title: newTask.name,
+        //    comment: newTask.text,
         }
 
         const savedTask = await postUserTask(state.user.id, sendingData)
+        
         newTask = {
             id: savedTask.id,
             name: savedTask.title,
@@ -103,7 +105,6 @@ export const tasksSlice = createSlice({
         },
         [postTaskAction.rejected]: (state, action) => {
             state.isLoading = false;
-            return initialState;
         }
     }
 })

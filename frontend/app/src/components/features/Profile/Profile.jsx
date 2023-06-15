@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 import style from './Profile.module.css';
 
 function Profile() {
-    const isAuth = useSelector(state => state.user.isAuth)
+    const isAuth = useSelector(state => state.user.isAuth);
+    const username = useSelector(state => state.user.username);
 
     return (
         <>

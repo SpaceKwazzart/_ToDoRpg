@@ -1,9 +1,9 @@
 import axios from "axios"
-import { HOST } from "../consts";
+import { HOST, PORT } from "../consts";
 
 export const postUserTask = async (userId, data) => {
     try {
-        const response = await axios.post(`http://${HOST}:8000/users/${userId}/todos/`,
+        const response = await axios.post(`http://${HOST}:${PORT}/api/users/${userId}/todos/`,
         data);
         return response.data;
     } catch (error) {

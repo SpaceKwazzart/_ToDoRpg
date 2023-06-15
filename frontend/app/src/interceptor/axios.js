@@ -1,3 +1,5 @@
+import { HOST, PORT } from '../consts'
+
 import axios from "axios";
 
 let refresh = false;
@@ -7,7 +9,7 @@ axios.interceptors.response.use(resp => resp, async error => {
      refresh = true;
      console.log(localStorage.getItem('refresh_token'))
      const { data, status } = await   
-           axios.post('http://localhost:8000/token/refresh/', {      
+           axios.post(`http://${HOST}:${PORT}/api/token/refresh/`, {      
                       refresh: localStorage.getItem('refresh_token'),
                       }, { headers: { 'Content-Type': 'application/json' } });
     console.log(data)

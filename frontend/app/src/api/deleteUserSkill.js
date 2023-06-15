@@ -1,9 +1,10 @@
 import axios from "axios";
-import { HOST } from "../consts";
+import { HOST, PORT } from "../consts";
 
 export const deleteUserSkill = async (userId, skillId) => {
   try {
-    await axios.delete(`http://${HOST}:8000/users/${userId}/skills/${skillId}`);
+    const response = await axios.delete(`http://${HOST}:${PORT}/api/users/${userId}/skills/${skillId}`);
+    return response;
   } catch (error) {
     console.error(error.response.data);
   }

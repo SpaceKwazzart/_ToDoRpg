@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getUser } from '../api/getUser'
-import GROWTH_VALUE from '../consts'
 
 const initialState = {
     isLoading: false,
@@ -22,6 +21,7 @@ export const fetchUser = createAsyncThunk(
       if (state.user.id !== -1){
         const userData = await getUser(state.user.id);
         if (userData !== null & userData !== undefined) {
+          console.log(userData);
           return userData;
         }
         throw new Error('Bad user response');
@@ -49,23 +49,14 @@ export const userSlice = createSlice({
         },
 
         addExp: (state, action) => {
-            let newExp = state.currentExp + action.payload;
-            let updatedState = { ...state };
-          
-            while (newExp >= updatedState.currentMax) {
-              updatedState = {
-                ...updatedState,
-                currentMax: updatedState.currentMax * GROWTH_VALUE,
-                level: updatedState.level + 1,
-                currentExp: newExp - updatedState.currentMax,
-              };
-              newExp = updatedState.currentExp;
+            const newState = {
+              ...state,
+              level: action.payload.level,
+              totalTodo: action.payload.total_todo,
+              currentExp: action.payload.current_exp,
+              currentMax: action.payload.current_max,
             }
-          
-            return {
-              ...updatedState,
-              currentExp: newExp,
-            };
+            return newState;
           }
     },
     extraReducers: {

@@ -1,9 +1,9 @@
 import axios from "axios"
-import { HOST } from "../consts";
+import { HOST, PORT } from "../consts";
 
 export const getUser = async (userId) => {
     try {
-        const response = await axios.get(`http://${HOST}:8000/users/${userId}`,
+        const response = await axios.get(`http://${HOST}:${PORT}/api/users/${userId}`,
         // {headers: {
         //     'Content-Type': 'application/json',
         //     withCredentials: true,}}
