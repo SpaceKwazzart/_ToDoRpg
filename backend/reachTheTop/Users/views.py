@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import Profile
 from .serializers import ProfileSerializer
+from .permissions import IsOwnerOrReadOnly
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,7 +17,7 @@ def index(request):
 
 class RetrieveUser(RetrieveAPIView):
      serializer_class = ProfileSerializer
-     permission_classes = [IsAuthenticated]
+     permission_classes = [IsOwnerOrReadOnly]
      lookup_field = 'user_id'
      queryset = Profile.objects
 
