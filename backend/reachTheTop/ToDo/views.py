@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from Users.models import Profile
 from Users.serializers import ProfileSerializer
+from Users.permissions import IsOwnerOrReadOnly
 from .models import Todo, Skill
 from .serializers import TodoSerializer, SkillSerializer
 from .business_logic import update_level
@@ -16,11 +17,22 @@ class UserTodoListCreate(ListCreateAPIView):
     View for reading user tasks and create new
     """
     serializer_class = TodoSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
-        return Todo.objects.filter(user_id=user_id).order_by('-created_date')
+        profile_id = Profile.objects.get(user_id=user_id)
+        return Todo.objects.filter(user_id=profile_id).order_by('-created_date')
+    
+    def create(self, request, *args, **kwargs):
+        user_id = self.kwargs['user_id']
+        profile_id = Profile.objects.get(user_id=user_id)
+        request.data['user'] = profile_id.id
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
     
 class UserTodoRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
@@ -28,11 +40,12 @@ class UserTodoRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     View for deleting user tasks
     """
     serializer_class = TodoSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
-        return Todo.objects.filter(user_id=user_id)
+        profile_id = Profile.objects.get(user_id=user_id)
+        return Todo.objects.filter(user_id=profile_id)
 
 
 
@@ -41,11 +54,22 @@ class UserSkillListCreate(ListCreateAPIView):
     View for reading user skills and create new
     """
     serializer_class = SkillSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
-        return Skill.objects.filter(user_id=user_id).order_by('-created_date')
+        profile_id = Profile.objects.get(user_id=user_id)
+        return Skill.objects.filter(user_id=profile_id).order_by('-created_date')
+    
+    def create(self, request, *args, **kwargs):
+        user_id = self.kwargs['user_id']
+        profile_id = Profile.objects.get(user_id=user_id)
+        request.data['user'] = profile_id.id
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
     
 class UserSkillRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
@@ -53,11 +77,12 @@ class UserSkillRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     View for deleting user skills
     """
     serializer_class = SkillSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
-        return Skill.objects.filter(user_id=user_id)
+        profile_id = Profile.objects.get(user_id=user_id)
+        return Skill.objects.filter(user_id=profile_id)
     
     def update(self, request, *args, **kwargs):
         new_expirience = float(request.data.get('new_expirience', None))
@@ -70,7 +95,8 @@ class UserSkillRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
             
             try:
                 skill = self.get_object()
-                user = Profile.objects.get(pk=kwargs["user_id"])
+                profile_id = kwargs["user_id"]
+                user = Profile.objects.get(user_id=profile_id)
                 
                 new_user_data = update_level(new_expirience, user)
                 new_skill_data = update_level(new_expirience, skill)
