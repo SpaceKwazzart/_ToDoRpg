@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '@mui/material';
 
-import Skill from '../../features/Skill/Skill';
-import usePopUp from '../../../hooks/usePopUp';
-import Modal from '../../modal/Modal/Modal';
+import Skill from '../Skill/Skill';
+import usePopUp from '../../hooks/usePopUp';
+import Modal from '../../components/modal/Modal/Modal';
 
-import { completeTaskAction } from '../../../store/skillsReducer';
+import { completeTaskAction } from '../../store/skillsReducer';
 
 import style from './Task.module.css';
 

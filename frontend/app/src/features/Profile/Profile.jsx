@@ -1,18 +1,19 @@
 import { useSelector } from 'react-redux';
-import { Button } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import style from './Profile.module.css';
 
 function Profile() {
-    const isAuth = useSelector(state => state.user.isAuth);
-    const username = useSelector(state => state.user.username);
+    const user = useSelector(state => state.user);
 
     return (
         <>
         {
-        isAuth
+        user.isAuth
         ?
-        <NavLink to={"/profile"}><Button>Profile</Button></NavLink>
+        <NavLink to={"/profile"}>
+            <Avatar src={user.avatar}></Avatar>
+        </NavLink>
         :
         <nav className={style.signButtons}>
             <NavLink to={"/signin"}><Button sx={{fontSize: "12px"}}>Sign in</Button></NavLink>

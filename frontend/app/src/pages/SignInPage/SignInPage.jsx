@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 import { signIn } from "../../store/userReducer";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import { HOST, PORT } from "../../consts.js"
+import { HOST, PORT } from "../../consts.js";
+import style from './SignInPage.module.css';
 
 // Define the Login function.
 export const SignInPage = () => {
@@ -20,7 +21,6 @@ export const SignInPage = () => {
                 username: username,
                 password: password,
                };
-          // Create the POST requuest
 
           try {
             const { data } = await axios.post(
@@ -40,22 +40,21 @@ export const SignInPage = () => {
             return navigate("/");
           } catch (error) {
             if (error.response && error.response.status === 401) {
-              // Действия при статусе 401 (Unauthorized)
               console.log('Unauthorized');
             } else {
-              // Действия при других ошибках
               console.log('Error:', error.message);
             }
           }
     }
     return(
-      <div className="">
+      <div>
         <form className="" onSubmit={submit}>
-          <div className="">
+          <div className={style.container}>
             <h3 className="">Sign In</h3>
 
-            <div className="">
+            <div className={style.block}>
               <label>Username</label>
+              <br />
               <input className="" 
                 placeholder="Enter Username" 
                 name='username'  
@@ -64,8 +63,9 @@ export const SignInPage = () => {
                 onChange={e => setUsername(e.target.value)}/>
             </div>
 
-            <div className="">
+            <div className={style.block}>
               <label>Password</label>
+              <br />
               <input name='password' 
                 type="password"     
                 className=""
@@ -75,10 +75,10 @@ export const SignInPage = () => {
                 onChange={e => setPassword(e.target.value)}/>
             </div>
 
-            <div className="">
-              <button onClick={(e) => submit(e)} type="submit" 
-                 className="btn btn-primary">Submit</button>
-              <Button onClick={(e) => {
+            <div className={style.block}>
+              <input style={{"display": "none"}} type="submit" />
+              <Button
+              onClick={(e) => {
                 submit(e);
                 }}>SUBMIT</Button>
             </div>

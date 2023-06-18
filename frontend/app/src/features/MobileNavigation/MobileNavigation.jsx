@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import style from "./MobileNavigation.module.css";
 import { NavLink } from "react-router-dom";
-import usePopUp from "../../../hooks/usePopUp";
+import usePopUp from "../../hooks/usePopUp";
 
 function MobileNavigation() {
     const [isVisible, setIsVisible, menuRef] = usePopUp(); 

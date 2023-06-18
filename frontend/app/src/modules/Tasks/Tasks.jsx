@@ -1,23 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
 import style from './Tasks.module.css'
 import Task from '../../features/Task/Task';
-import Modal from '../../modal/Modal/Modal';
-import usePopUp from '../../../hooks/usePopUp';
+import Modal from '../../components/modal/Modal/Modal';
+import usePopUp from '../../hooks/usePopUp';
 import { useEffect, useRef, useState } from 'react';
-import { postTaskAction, fetchTasksAction, removeTask } from '../../../store/tasksReducer';
+import { postTaskAction, fetchTasksAction } from '../../store/tasksReducer';
 import { Button, Typography } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
-import { deleteTodoAction } from '../../../store/tasksReducer';
+import { deleteTodoAction } from '../../store/tasksReducer';
 
 function Tasks() {
     const dispatch = useDispatch();
     const tasks = useSelector(state => state.tasks);
+    const isSkillsVisible = useSelector(state => state.skills.isVisible);
     const [newTask, setNewTask] = useState({name: "", text: "", order: 1, id: uuidv4()});
     const [isVisible, setIsVisible, modalRef] = usePopUp();
 
     useEffect( () => {
         dispatch(fetchTasksAction());
-    }, [])
+    }, [dispatch])
 
     const nameRef = useRef();
     const textRef = useRef();
@@ -38,16 +39,16 @@ function Tasks() {
 
     return (
         <>
+        <Typography sx={{marginTop: "0px"}} variant="h6">Todos</Typography>
         {
             tasks.isLoading
             ?
             <Typography>Loading...</Typography>
             :
-            <div className={style.container}>
+            <div style={{maxHeight: `${isSkillsVisible ? "32vh" : "60vh"}`}} className={style.container}>
                 {tasks.array.map(task => {
                     return <Task onDelete={onDelete} key={task.id} {...task}/>
                 })}
-                <Button onClick={() => setIsVisible(true)}>Add</Button>
                 
                 <Modal onSubmit={onCommit} isVisible={isVisible} setIsVisible={setIsVisible} modalRef={modalRef}>
                     <h2>Add new task</h2>
@@ -72,6 +73,7 @@ function Tasks() {
                 </Modal>
             </div>
         }
+        <Button onClick={() => setIsVisible(true)}>Add</Button>
         </>
     );
 }

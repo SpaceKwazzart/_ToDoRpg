@@ -4,7 +4,6 @@
     width: 85%;
     max-width: 900px;
     overflow-y: scroll;
-    max-height: 75vh;
     margin-top: 20px;
     display: flex;
     flex-direction: column;

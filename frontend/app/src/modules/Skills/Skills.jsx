@@ -3,15 +3,15 @@ import Skill from "../../features/Skill/Skill";
 import style from './Skills.module.css';
 import { Button, TextField, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from "react";
-import usePopUp from "../../../hooks/usePopUp";
-import Modal from "../../modal/Modal/Modal";
-import { postSkillAction, fetchSkills } from "../../../store/skillsReducer";
-import { deleteSkillAction } from '../../../store/skillsReducer'
+import usePopUp from "../../hooks/usePopUp";
+import Modal from "../../components/modal/Modal/Modal";
+import { postSkillAction, fetchSkills, changeVisible } from "../../store/skillsReducer";
+import { deleteSkillAction } from '../../store/skillsReducer'
 
 function Skills() {
     const dispatch = useDispatch();
     const skills = useSelector(state => state.skills);
-    const [isVisible, setIsVisible] = useState(false);
+    const isVisible = skills.isVisible;
     const [modalVisible, setModalVisible, modalRef] = usePopUp();
     const [deleteModalVisible, setDeleteModalVisible, deleteModalRef] = usePopUp();
     const [name, setName] = useState("");
@@ -19,7 +19,7 @@ function Skills() {
 
     useEffect(() => {
         dispatch(fetchSkills())
-    }, [])
+    }, [dispatch])
 
     const onDelete = useCallback((name) => {
         let skill = skills.array.filter(skill => skill.name === name)
@@ -59,16 +59,16 @@ function Skills() {
                 <Typography>Loading</Typography>
                 :
                 <>
+                <Typography sx={{marginTop: "20px"}} variant="h5">Skills</Typography>
                 {
                     isVisible
                     ?
-                    <Button onClick={() => setIsVisible(!isVisible)}>Close</Button>
+                    <Button onClick={() => dispatch(changeVisible())}>Close</Button>
                     :
-                    <Button onClick={() => setIsVisible(!isVisible)}>Skills</Button>
+                    <Button onClick={() => dispatch(changeVisible())}>Open</Button>
                 }
 
                 <div className={`${style.skillsContainer} ${isVisible ? style.active : ''}`}>
-                <Button styling={{marginTop: "35px"}} onClick={showModal}>Add</Button>
 
                     {skills.array.map(skill => {
                         return (
@@ -78,7 +78,17 @@ function Skills() {
                         </div>
                         )
                     })}
+                
                 </div>
+
+                {
+                    isVisible
+                    ?
+                    <Button size="large" sx={{marginTop: "0px", fontSize: "1.2rem"}} onClick={showModal}>Add</Button>
+                    :
+                    <></>
+
+                }
 
                 <Modal onSubmit={createNewSkill} modalRef={modalRef} isVisible={modalVisible}>
                     <h2>Create new skill</h2>

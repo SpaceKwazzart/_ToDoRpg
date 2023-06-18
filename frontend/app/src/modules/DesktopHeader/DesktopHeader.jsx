@@ -1,18 +1,17 @@
 import { useSelector } from "react-redux";
-import MobileNavigation from "../../features/MobileNavigation/MobileNavigation";
+import DesktopNavigation from "../../features/DesktopNavigation/DesktopNavigation";
 import Profile from "../../features/Profile/Profile";
 import ProgressBar from "../../features/ProgressBar/ProgressBar";
-import style from "./MobileHeader.module.css";
+import style from "./DesktopHeader.module.css";
 import { Typography } from "@mui/material";
 
-function MobileHeader() {
+function DesktopHeader() {
     const userState = useSelector(state => state.user);
     const percent = userState.currentExp / userState.currentMax * 100;
     const isLoading = useSelector(state => state.user.isLoading);
 
     return (
-        <div className={style.container}>
-            <MobileNavigation/>
+        <header className={style.container}>
             {
                 isLoading
                 ?
@@ -20,9 +19,10 @@ function MobileHeader() {
                 :
                 <ProgressBar level={userState.level} value={percent}/>
             }
+            <div className={style.centerElement}><DesktopNavigation/></div>
             <Profile/>
-        </div>
+        </header>
     );
 }
 
-export default MobileHeader;
+export default DesktopHeader;

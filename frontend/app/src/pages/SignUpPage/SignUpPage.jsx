@@ -3,6 +3,8 @@ import axios from "axios";
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { HOST, PORT } from '../../consts';
+import style from './SignUpPage.module.css';
+import { Button } from "@mui/material";
 // Define the Login function.
 export const SignUpPage = () => {
      const [username, setUsername] = useState('');
@@ -25,7 +27,8 @@ export const SignUpPage = () => {
               user,
               { headers: { 'Content-Type': 'application/json' } }
             );
-          
+            
+            console.log(data);
             localStorage.clear();
             localStorage.setItem('access_token', data.access);
             localStorage.setItem('refresh_token', data.refresh);
@@ -35,10 +38,8 @@ export const SignUpPage = () => {
             return navigate("/");
           } catch (error) {
             if (error.response && error.response.status === 401) {
-              // Действия при статусе 401 (Unauthorized)
               console.log('Unauthorized');
             } else {
-              // Действия при других ошибках
               console.log('Error:', error.message);
             }
           }
@@ -46,11 +47,12 @@ export const SignUpPage = () => {
     return(
       <div className="">
         <form className="" onSubmit={submit}>
-          <div className="">
+          <div className={style.container}>
             <h3 className="">Sign Up</h3>
 
-            <div className="">
+            <div className={style.block}>
               <label>Username</label>
+              <br />
               <input className="" 
                 placeholder="Enter Username" 
                 name='username'  
@@ -59,8 +61,9 @@ export const SignUpPage = () => {
                 onChange={e => setUsername(e.target.value)}/>
             </div>
 
-            <div className="">
+            <div className={style.block}>
               <label>Email</label>
+              <br />
               <input className="" 
                 placeholder="Enter email" 
                 name='email'  
@@ -69,8 +72,9 @@ export const SignUpPage = () => {
                 onChange={e => setEmail(e.target.value)}/>
             </div>
 
-            <div className="">
+            <div className={style.block}>
               <label>Password</label>
+              <br />
               <input name='password' 
                 type="password"     
                 className=""
@@ -81,8 +85,8 @@ export const SignUpPage = () => {
             </div>
 
             <div className="">
-              <button type="submit" 
-                 className="btn btn-primary">Submit</button>
+            <input style={{"display": "none"}} type="submit" />
+              <Button onClick={e => submit(e)} type="submit">SUBMIT</Button>
             </div>
           </div>
        </form>

@@ -8,6 +8,7 @@ import { deleteTodoAction } from "./tasksReducer";
 
 const initialState = {
   isLoading: false,
+  isVisible: true,
   array: [],
 }
 
@@ -126,8 +127,13 @@ export const skillSlice = createSlice({
             });
             state.array = newArray;
             console.log(state.array);
-          }
+          },
+
+        changeVisible: (state) => {
+          state.isVisible = !state.isVisible;
+        }
     },
+
     extraReducers: {
       [fetchSkills.pending]: (state, action) => {
         state.isLoading = true;
@@ -164,6 +170,6 @@ export const skillSlice = createSlice({
     }
 })
 
-export const { addSkill, deleteSkill, addSkillExp } = skillSlice.actions
+export const { addSkill, deleteSkill, addSkillExp, changeVisible } = skillSlice.actions
 
 export default skillSlice.reducer

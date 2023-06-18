@@ -1,46 +1,31 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getUser } from '../api/getUser'
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchUser } from './userAsyncActions';
+
+const userId = localStorage.getItem('access_token') 
+                       ? Number(JSON.parse(atob(localStorage.getItem('access_token') .split(".")[1])).user_id)
+                       : -1
+
+const isAuth = userId === -1 ? false : true
 
 const initialState = {
     isLoading: false,
-    id: -1,
-    isAuth: false,
+    id: userId,
+    isAuth: isAuth,
     level: 'sign in for progress',
     currentExp: 0,
     currentMax: 1,
     avatar: "",
     totalTodo: 0,
+    username: "",
 }
-
-
-export const fetchUser = createAsyncThunk(
-  'user/fetchUser',
-  async function(_, { getState, rejectWithValue }) {
-    const state = await getState();
-    try {
-      if (state.user.id !== -1){
-        const userData = await getUser(state.user.id);
-        if (userData !== null & userData !== undefined) {
-          console.log(userData);
-          return userData;
-        }
-        throw new Error('Bad user response');
-      } else {
-        throw new Error('Invalid user ID');
-      }
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
         signIn: (state, action) => {
-            state.isAuth = true
-            state.id = action.payload
+            state.isAuth = true;
+            state.id = action.payload;
         },
 
         signOut: (state) => {
@@ -63,6 +48,7 @@ export const userSlice = createSlice({
       [fetchUser.pending]: (state, action) => {
         state.isLoading = true;
       },
+      
       [fetchUser.fulfilled]: (state, action) => {
         return {
           ...state,
@@ -72,6 +58,8 @@ export const userSlice = createSlice({
           currentMax: action.payload.current_max,
           avatar: action.payload.avatar,
           totalTodo: action.payload.total_todo,
+          profileid: action.payload.id,
+          username: action.payload.username,
         }
       },
       [fetchUser.rejected]: (state, action) => {
@@ -82,5 +70,5 @@ export const userSlice = createSlice({
 
 
 
-export const { signIn, signOut, addExp } = userSlice.actions;
+export const { signIn, signOut, addExp, setUserId } = userSlice.actions;
 export default userSlice.reducer;

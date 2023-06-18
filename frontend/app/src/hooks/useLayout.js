@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import DesktopLayout from "../components/Layouts/DesktopLayout/DesktopLayout";
-import MobileLayout from "../components/Layouts/MobileLayout/MobileLayout";
+import DesktopLayout from "../Layouts/DesktopLayout/DesktopLayout";
+import MobileLayout from "../Layouts/MobileLayout/MobileLayout";
 
 export default function useLayout() {
     const isDesktop = useSelector(state => state.media.isDesktop);

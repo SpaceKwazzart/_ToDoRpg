@@ -9,7 +9,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
-from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetrieveAPIView, UpdateAPIView
+from rest_framework.parsers import MultiPartParser, FormParser
 
 # Create your views here.
 def index(request):
@@ -55,3 +56,11 @@ class LogoutView(APIView):
                return Response(status=status.HTTP_205_RESET_CONTENT)
           except Exception:
                return Response(status=status.HTTP_400_BAD_REQUEST)
+          
+class ProfileUpdateView(UpdateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    parser_classes = [MultiPartParser, FormParser]
+    
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
