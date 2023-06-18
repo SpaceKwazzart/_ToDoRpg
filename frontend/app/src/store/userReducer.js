@@ -29,8 +29,8 @@ export const userSlice = createSlice({
         },
 
         signOut: (state) => {
-            state.isAuth = false
-            state.id = -1
+            state.isAuth = false;
+            state.id = -1;
         },
 
         addExp: (state, action) => {

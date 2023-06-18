@@ -1,4 +1,1 @@
-export const GROWTH_VALUE = 1.0673003;
-
-export const HOST = 'localhost';
-export const PORT = '8000';
+export const [HOST, PORT] = process.env.REACT_APP_HOST_STRING ? process.env.REACT_APP_HOST_STRING.split(":") : ["localhost", "8000"]

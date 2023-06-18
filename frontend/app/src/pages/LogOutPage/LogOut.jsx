@@ -1,6 +1,6 @@
 import {useEffect} from "react"
 import axios from "axios";
-
+import { HOST, PORT } from '../../consts';
 
 export const Logout = () => {
 
@@ -8,7 +8,7 @@ export const Logout = () => {
        (async () => {
          try {
            const {data} = await  
-                 axios.post('http://localhost:8000/logout/',{
+                 axios.post(`http://${HOST}:${PORT}/logout/`,{
                  refresh_token: localStorage.getItem('refresh_token')
                  }, {headers: {'Content-Type': 'application/json'}},);
            

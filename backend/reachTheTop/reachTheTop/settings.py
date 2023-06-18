@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-vn_zjh@-bf5b7t+69_stuen$y7g%(zm$ug=^cxi1c2pt00s()5
 # DEBUG = os.getenv("ISDEBUG")
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'todobackend', '192.168.160.1', '192.168.1.15']
+ALLOWED_HOSTS = ['localhost', 'todobackend', '192.168.160.1', '192.168.1.15', '192.168.1.19']
 
 
 # Application definition
@@ -100,17 +100,11 @@ WSGI_APPLICATION = 'reachTheTop.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': os.getenv("DB"),
-        # 'USER': os.getenv("USER"),
-        # 'PASSWORD': os.getenv("PASSWORD"),
-        # 'HOST': os.getenv("HOST"),
-        # 'PORT': '5432',
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'NAME': os.getenv("DB") if os.getenv("DB") else 'postgres',
+        'USER': os.getenv("USER") if os.getenv("USER") else 'postgres',
+        'PASSWORD': os.getenv("PASSWORD") if os.getenv("PASSWORD") else 'password',
+        'HOST': os.getenv("HOST") if os.getenv("HOST") else 'localhost',
         'PORT': '5432',
     }
 }
@@ -154,10 +148,10 @@ STATIC_URL = 'static/'
 
 
 # Actual directory user files go to
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'reachTheTop', 'mediafiles')
 
 # URL used to access the media
-MEDIA_URL = '/media/'
+MEDIA_URL = '/api/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

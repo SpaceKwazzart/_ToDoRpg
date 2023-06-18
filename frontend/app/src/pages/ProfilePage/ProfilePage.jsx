@@ -10,10 +10,14 @@ function ProfilePage() {
     return (
         <main>
             <h1>Profile Page</h1>
-            <Button onClick={() => {
-                postSignOut();
-                dispatch(signOut());
-                return navigate("/");
+            <Button onClick={async () => {
+                const request = await postSignOut();
+                console.log("Sign Out request: ", request)
+                if (request.status === 205) {
+                    localStorage.clear();
+                    dispatch(signOut());
+                    return navigate("/"); 
+                }
             }}>Log out</Button>
         </main>
     );

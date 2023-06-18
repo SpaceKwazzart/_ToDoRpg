@@ -8,11 +8,15 @@ import SignInPage from './pages/SignInPage/SignInPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import RatingPage from './pages/RatingPage/RatingPage';
 import { useMedia } from 'react-use';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setDisplayType } from './store/mediaReducer';
 import { useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { HOST, PORT } from './consts';
+
+
+console.log('ENVS: ', HOST, PORT)
 
 const darkTheme = createTheme({
   palette: {
