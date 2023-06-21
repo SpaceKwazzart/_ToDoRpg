@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-vn_zjh@-bf5b7t+69_stuen$y7g%(zm$ug=^cxi1c2pt00s()5
 # DEBUG = os.getenv("ISDEBUG")
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'todobackend', '192.168.160.1', '192.168.1.15', '192.168.1.19']
+ALLOWED_HOSTS = ['localhost', 'todobackend', '192.168.160.1', '192.168.1.15', '192.168.1.19', '192.168.63.121', '192.168.50.165']
 
 
 # Application definition

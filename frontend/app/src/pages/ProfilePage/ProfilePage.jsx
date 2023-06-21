@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { signOut } from '../../store/userReducer'
 import { useNavigate } from 'react-router-dom';
 import { postSignOut } from '../../api/postSignOut';
+import axios from 'axios';
 
 function ProfilePage() {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function ProfilePage() {
                 console.log("Sign Out request: ", request)
                 if (request.status === 205) {
                     localStorage.clear();
+                    axios.defaults.headers.common['Authorization'] = null;
                     dispatch(signOut());
                     return navigate("/"); 
                 }

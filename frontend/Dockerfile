@@ -4,7 +4,7 @@ COPY ./app/package.json package.json
 COPY create-env-file.sh ./create-env-file.sh
 RUN npm i
 
-RUN sh create-env-file.sh REACT_APP_HOST_STRING="192.168.1.19:80"
+RUN sh create-env-file.sh REACT_APP_HOST_STRING="192.168.50.165:80"
 
 ARG HOST=todobackend
 ENV HOST $HOST

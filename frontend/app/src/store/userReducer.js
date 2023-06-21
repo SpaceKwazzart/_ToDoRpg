@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchUser } from './userAsyncActions';
 
 const userId = localStorage.getItem('access_token') 
-                       ? Number(JSON.parse(atob(localStorage.getItem('access_token') .split(".")[1])).user_id)
+                       ? Number(JSON.parse(atob(localStorage.getItem('access_token').split(".")[1])).user_id)
                        : -1
 
 const isAuth = userId === -1 ? false : true

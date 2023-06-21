@@ -13,10 +13,7 @@ import { setDisplayType } from './store/mediaReducer';
 import { useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { HOST, PORT } from './consts';
 
-
-console.log('ENVS: ', HOST, PORT)
 
 const darkTheme = createTheme({
   palette: {
